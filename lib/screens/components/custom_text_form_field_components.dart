@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fteam_firebase_login_app/data/user_data.dart';
 import 'package:fteam_firebase_login_app/utils/colors.dart';
-
-import '../../data/user_data.dart';
 
 class CustomTextFormFieldComponents extends StatefulWidget {
   final Icon? prefixIcon;
@@ -57,8 +56,15 @@ class CustomTextFormFieldComponents extends StatefulWidget {
 
 class _CustomTextFormFieldComponentsState
     extends State<CustomTextFormFieldComponents> {
-  final User user =
-      User(email: '', password: '', name: '', confirmPassword: '', id: '');
+  final User user = User(
+    email: '',
+    password: '',
+    name: '',
+    confirmPassword: '',
+    id: '',
+    country: '',
+    cpf: '',
+  );
 
   bool focused = false;
 
@@ -67,7 +73,6 @@ class _CustomTextFormFieldComponentsState
     return Center(
       child: Card(
         elevation: 0,
-        // margin: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -85,11 +90,11 @@ class _CustomTextFormFieldComponentsState
               focusNode: widget.focusNode,
               textCapitalization: TextCapitalization.words, // letra maiuscula
               obscureText: widget.obscureText ?? false, // senha
-              cursorColor: Colors.grey,
+              cursorColor: AppColors.colorsTextFormField,
               style: const TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: Colors.grey),
+                  color: AppColors.colorsTextFormField),
               keyboardType: TextInputType.name,
               autocorrect: false,
               validator: (value) => widget.validator!(value!),
@@ -105,7 +110,7 @@ class _CustomTextFormFieldComponentsState
                     ),
                 prefixIcon: Icon(
                   widget.icon,
-                  color: ColorsApp.primaryColor,
+                  color: AppColors.primaryColor,
                   size: 24,
                 ),
                 suffixIcon: GestureDetector(
@@ -118,26 +123,26 @@ class _CustomTextFormFieldComponentsState
                 hintStyle: const TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
-                  color: Colors.grey,
+                  color: AppColors.colorsTextFormField,
                 ),
-                border: const OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(
-                    color: ColorsApp.primaryColor,
+                    color: AppColors.primaryColor,
                     width: 1.5,
                   ),
                 ),
                 focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(
-                    color: ColorsApp.primaryColor,
+                    color: AppColors.primaryColor,
                     width: 2,
                   ),
                 ),
                 errorBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(
-                    color: Colors.red,
+                    color: AppColors.colorsError,
                     // color: ColorsApp.primaryColor,
                     width: 1.5,
                   ),
@@ -145,7 +150,7 @@ class _CustomTextFormFieldComponentsState
                 focusedErrorBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(
-                    color: Colors.red,
+                    color: AppColors.colorsError,
                     width: 2,
                   ),
                 ),

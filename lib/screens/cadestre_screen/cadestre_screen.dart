@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../components/custom_text_form_field_components.dart';
 import '../../utils/colors.dart';
-import '../components/text_header_components.dart';
+import 'components/text_header_cadastre_components.dart';
 
 class CadestreScreen extends StatefulWidget {
   const CadestreScreen({super.key});
@@ -36,19 +36,19 @@ class _CadestreScreenState extends State<CadestreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: AppColors.colorsBackgroundWhite,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: AppColors.colorsBackgroundGrey,
         elevation: 0,
         scrolledUnderElevation: 10,
         leading: InkWell(
           onTap: () {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_sharp,
-            color: Colors.grey[700],
+            color: AppColors.colorsIconAppBar,
             size: 28,
           ),
         ),
@@ -57,21 +57,14 @@ class _CadestreScreenState extends State<CadestreScreen> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            const TextHeaderComponents(),
-            const SizedBox(
-              height: 15,
-            ),
+            const TextHeaderCadestreComponents(),
             Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
-                color: Colors.white,
-              ),
-              constraints: const BoxConstraints(
-                maxHeight: double.infinity,
-                minWidth: 320,
+                color: AppColors.colorsBackgroundWhite,
               ),
               alignment: Alignment.bottomCenter,
               child: Center(
@@ -92,7 +85,7 @@ class _CadestreScreenState extends State<CadestreScreen> {
                         children: [
                           CustomTextFormFieldComponents(
                             label: 'Full Name',
-                            hintText: '  Full Name',
+                            hintText: '  Enter your full name',
                             textInputAction: TextInputAction.next,
                             icon: Icons.person_outline,
                             onChanged: (value) => _userName = value,
@@ -105,6 +98,13 @@ class _CadestreScreenState extends State<CadestreScreen> {
                               }
                               return null;
                             },
+                            //   if (value!.isEmpty ||
+                            //       !RegExp(r'ˆ[a-z A-Z]+$').hasMatch(value)) {
+                            //     return 'Enter correct name';
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                           ),
                           const Padding(
                             padding: EdgeInsets.all(5),
@@ -113,6 +113,7 @@ class _CadestreScreenState extends State<CadestreScreen> {
                             label: 'Email',
                             hintText: '  Email',
                             textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
                             icon: Icons.email_outlined,
                             onChanged: (value) => _userEmail = value,
                             validator: (value) {
@@ -121,6 +122,7 @@ class _CadestreScreenState extends State<CadestreScreen> {
                               }
 
                               if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                                /// comeca com string e aceita quantos caracteres necessario S+ em 3 grupos
                                 return 'Please enter a valid email address';
                               }
                               return null;
@@ -137,12 +139,12 @@ class _CadestreScreenState extends State<CadestreScreen> {
                             suffixIcon: isPasswordObscure == true
                                 ? const Icon(
                                     Icons.visibility_off_outlined,
-                                    color: ColorsApp.primaryColor,
+                                    color: AppColors.primaryColor,
                                     size: 24,
                                   )
                                 : const Icon(
                                     Icons.visibility_outlined,
-                                    color: ColorsApp.primaryColor,
+                                    color: AppColors.primaryColor,
                                     size: 24,
                                   ),
                             onTapSuffixIcon: () {
@@ -168,19 +170,19 @@ class _CadestreScreenState extends State<CadestreScreen> {
                           CustomTextFormFieldComponents(
                             label: 'Confirm Password',
                             hintText: '  Confirm Password',
-                            textInputAction: TextInputAction.done, //go
+                            textInputAction: TextInputAction.done,
                             icon: Icons.lock_outline,
                             obscureText: isConfirmPasswordObscure,
                             onChanged: (value) => _confirmPassword = value,
                             suffixIcon: isConfirmPasswordObscure == true
                                 ? const Icon(
                                     Icons.visibility_off_outlined,
-                                    color: ColorsApp.primaryColor,
+                                    color: AppColors.primaryColor,
                                     size: 24,
                                   )
                                 : const Icon(
                                     Icons.visibility_outlined,
-                                    color: ColorsApp.primaryColor,
+                                    color: AppColors.primaryColor,
                                     size: 24,
                                   ),
                             onTapSuffixIcon: () {
@@ -204,15 +206,18 @@ class _CadestreScreenState extends State<CadestreScreen> {
                           Container(
                             width: 255,
                             decoration: BoxDecoration(
-                              color: ColorsApp.primaryColor,
+                              color: AppColors.primaryColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             alignment: Alignment.center,
                             child: TextButton(
-                              onPressed: _trySubmitForm,
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/profile');
+                              },
                               child: const Text(
                                 'Sign Up ',
-                                style: TextStyle(color: Colors.white),
+                                style:
+                                    TextStyle(color: AppColors.colorsTextWhite),
                               ),
                             ),
                           ),
@@ -226,7 +231,6 @@ class _CadestreScreenState extends State<CadestreScreen> {
                 ),
               ),
             ),
-            // ),
           ],
         ),
       ),
