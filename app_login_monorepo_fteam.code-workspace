@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "fteam_login_app",
+			"path": "fteam_login_app"
+		},
+		{
+			"name": "core_module",
+			"path": "core_module"
+		},
+		{
+			"name": "monorepo_design_system",
+			"path": "monorepo_design_system"
+		}
+	],
+	"settings": {}
+}
