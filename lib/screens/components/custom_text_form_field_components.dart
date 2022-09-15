@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fteam_firebase_login_app/data/user_data.dart';
-import 'package:fteam_firebase_login_app/utils/colors.dart';
+import 'package:fteam_firebase_login_app/utils/app_colors.dart';
+import 'package:fteam_firebase_login_app/utils/app_font_size.dart';
 
 class CustomTextFormFieldComponents extends StatefulWidget {
   final Icon? prefixIcon;
@@ -80,9 +81,8 @@ class _CustomTextFormFieldComponentsState
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 22),
               child: Text(
                 widget.label,
-                style: const TextStyle(
+                style: AppFontSize.appFontSizeTextLabel.copyWith(
                   fontWeight: FontWeight.w600,
-                  fontSize: 14,
                 ),
               ),
             ),
@@ -91,9 +91,8 @@ class _CustomTextFormFieldComponentsState
               textCapitalization: TextCapitalization.words, // letra maiuscula
               obscureText: widget.obscureText ?? false, // senha
               cursorColor: AppColors.colorsTextFormField,
-              style: const TextStyle(
+              style: AppFontSize.appFontSizeTextHint.copyWith(
                   fontWeight: FontWeight.normal,
-                  fontSize: 18,
                   color: AppColors.colorsTextFormField),
               keyboardType: TextInputType.name,
               autocorrect: false,
@@ -120,39 +119,35 @@ class _CustomTextFormFieldComponentsState
                       : const SizedBox(),
                 ),
                 hintText: widget.hintText,
-                hintStyle: const TextStyle(
+                hintStyle: AppFontSize.appFontSizeTextHint.copyWith(
                   fontWeight: FontWeight.normal,
-                  fontSize: 18,
                   color: AppColors.colorsTextFormField,
                 ),
                 enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(
                     color: AppColors.primaryColor,
-                    width: 1.5,
+                    width: 0.5,
                   ),
                 ),
                 focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(
                     color: AppColors.primaryColor,
-                    width: 2,
+                    width: 1.5,
                   ),
                 ),
                 errorBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(
                     color: AppColors.colorsError,
-                    // color: ColorsApp.primaryColor,
-                    width: 1.5,
+                    width: 1,
                   ),
                 ),
                 focusedErrorBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(
-                    color: AppColors.colorsError,
-                    width: 2,
-                  ),
+                  borderSide:
+                      BorderSide(color: AppColors.colorsError, width: 1.5),
                 ),
               ),
               // inputFormatters: widget.inputFormatters, // formatar o texto

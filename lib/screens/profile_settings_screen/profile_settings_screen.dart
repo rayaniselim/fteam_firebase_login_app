@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fteam_firebase_login_app/screens/profile_settings_screen/components/image_profile_components.dart';
-import 'package:fteam_firebase_login_app/utils/colors.dart';
+import 'package:fteam_firebase_login_app/utils/app_colors.dart';
 
+import '../../utils/app_font_size.dart';
 import '../components/custom_text_form_field_components.dart';
 import 'components/text_header_profile_components.dart';
 
@@ -41,12 +42,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.colorsBackgroundWhite,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        // backgroundColor: AppColors.colorsAppBar,
-        backgroundColor: Colors.pink,
+        backgroundColor: AppColors.colorsBackgroundGrey,
         elevation: 0,
-        toolbarHeight: 90,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
@@ -105,7 +105,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               return null;
                             },
                             //   if (value!.isEmpty ||
-                            //       !RegExp(r'ˆ[a-z A-Z]+$').hasMatch(value)) {
+                            // !RegExp(r'ˆ[a-z A-Z]+$').hasMatch(value)) {
                             //     return 'Enter correct name';
                             //   } else {
                             //     return null;
@@ -119,19 +119,17 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                             label: 'CPF',
                             hintText: '  CPF',
                             textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.emailAddress,
+                            keyboardType: TextInputType.number,
                             icon: Icons.mode_edit_outline_outlined,
                             onChanged: (value) => _userEmail = value,
                             validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Please enter your email address';
+                              if (value!.isEmpty ||
+                                  !RegExp("[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[\-][0-9]{2}")
+                                      .hasMatch(value)) {
+                                return 'Enter correct cpf';
+                              } else {
+                                return null;
                               }
-
-                              if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                                /// comeca com string e aceita quantos caracteres necessario S+ em 3 grupos
-                                return 'Please enter a valid email address';
-                              }
-                              return null;
                             },
                           ),
                           const Padding(
@@ -143,13 +141,12 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                             textInputAction: TextInputAction.next,
                             icon: Icons.phone,
                             onChanged: (value) => _password = value,
-                            obscureText: isPasswordObscure,
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
                                 return 'This field is required';
                               }
                               if (value.trim().length < 8) {
-                                return 'Password must be at least 8 characters in length';
+                                return 'Fill in your phone correctly';
                               }
                               return null;
                             },
@@ -164,21 +161,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                             icon: Icons.edit_location_outlined,
                             obscureText: isConfirmPasswordObscure,
                             onChanged: (value) => _confirmPassword = value,
-                            suffixIcon:
-                                // isConfirmPasswordObscure == true
-                                //     ? const
-                                Icon(
+                            suffixIcon: const Icon(
                               Icons.keyboard_arrow_down_outlined,
                               color: AppColors.primaryColor,
                               size: 24,
                             ),
-                            // : const ListView(),
-
-                            // Icon(
-                            //     Icons.visibility_outlined,
-                            //     color: AppColors.primaryColor,
-                            //     size: 24,
-                            //   ),
                             onTapSuffixIcon: () {
                               setState(() {
                                 isConfirmPasswordObscure =
@@ -196,8 +183,33 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               return null;
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
+                          ),
+                          Container(
+                            width: 330,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            alignment: Alignment.center,
+                            child: TextButton(
+                              onPressed: () {
+                                _trySubmitForm();
+                                // Navigator.pushNamed(context, '/profile');
+                              },
+                              child: Text(
+                                'Confirm ',
+                                style:
+                                    AppFontSize.appFontSizeTextButton.copyWith(
+                                  color: AppColors.colorsTextWhite,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 30,
                           ),
                         ],
                       ),

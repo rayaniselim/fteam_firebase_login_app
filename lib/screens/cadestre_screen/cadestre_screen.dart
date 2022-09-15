@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/app_font_size.dart';
 import '../components/custom_text_form_field_components.dart';
-import '../../utils/colors.dart';
+import '../../utils/app_colors.dart';
 import 'components/text_header_cadastre_components.dart';
 
 class CadestreScreen extends StatefulWidget {
@@ -30,6 +31,7 @@ class _CadestreScreenState extends State<CadestreScreen> {
       debugPrint(_userName);
       debugPrint(_password);
       debugPrint(_confirmPassword);
+      Navigator.pushNamed(context, '/profile');
     }
   }
 
@@ -104,7 +106,7 @@ class _CadestreScreenState extends State<CadestreScreen> {
                             //   } else {
                             //     return null;
                             //   }
-                            // },
+                            // }, /// VER QUAL O LIMITE DE PALAVRAS DELE PQ NAO FUNCIONA
                           ),
                           const Padding(
                             padding: EdgeInsets.all(5),
@@ -139,12 +141,12 @@ class _CadestreScreenState extends State<CadestreScreen> {
                             suffixIcon: isPasswordObscure == true
                                 ? const Icon(
                                     Icons.visibility_off_outlined,
-                                    color: AppColors.primaryColor,
+                                    color: AppColors.colorsIconGrey,
                                     size: 24,
                                   )
                                 : const Icon(
                                     Icons.visibility_outlined,
-                                    color: AppColors.primaryColor,
+                                    color: AppColors.colorsIconGrey,
                                     size: 24,
                                   ),
                             onTapSuffixIcon: () {
@@ -158,8 +160,8 @@ class _CadestreScreenState extends State<CadestreScreen> {
                               if (value == null || value.trim().isEmpty) {
                                 return 'This field is required';
                               }
-                              if (value.trim().length < 8) {
-                                return 'Password must be at least 8 characters in length';
+                              if (value.trim().length < 6) {
+                                return 'Password must be at least 6 characters in length';
                               }
                               return null;
                             },
@@ -177,12 +179,12 @@ class _CadestreScreenState extends State<CadestreScreen> {
                             suffixIcon: isConfirmPasswordObscure == true
                                 ? const Icon(
                                     Icons.visibility_off_outlined,
-                                    color: AppColors.primaryColor,
+                                    color: AppColors.colorsIconGrey,
                                     size: 24,
                                   )
                                 : const Icon(
                                     Icons.visibility_outlined,
-                                    color: AppColors.primaryColor,
+                                    color: AppColors.colorsIconGrey,
                                     size: 24,
                                   ),
                             onTapSuffixIcon: () {
@@ -203,27 +205,31 @@ class _CadestreScreenState extends State<CadestreScreen> {
                             },
                           ),
                           const SizedBox(height: 50),
-                          Container(
-                            width: 255,
-                            decoration: BoxDecoration(
-                              color: AppColors.primaryColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            alignment: Alignment.center,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/profile');
-                              },
-                              child: const Text(
+                          InkWell(
+                            onTap: () {
+                              _trySubmitForm();
+                              // Navigator.pushNamed(context, '/profile');
+                            },
+                            child: Container(
+                              width: 255,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
                                 'Sign Up ',
                                 style:
-                                    TextStyle(color: AppColors.colorsTextWhite),
+                                    AppFontSize.appFontSizeTextButton.copyWith(
+                                  color: AppColors.colorsTextWhite,
+                                ),
                               ),
                             ),
                           ),
                           const SizedBox(
                             height: 30,
-                          )
+                          ),
                         ],
                       ),
                     ),

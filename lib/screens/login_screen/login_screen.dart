@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/app_font_size.dart';
 import '../components/custom_text_form_field_components.dart';
-import '../../utils/colors.dart';
-import 'components/text_header_login_components.dart';
+import '../../utils/app_colors.dart';
+import 'components/forgot_my_password_components.dart';
+import 'components/text_button_create_components.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({
-    super.key,
-  });
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       debugPrint('Everything looks good!');
       debugPrint(_userEmail);
       debugPrint(_password);
+      Navigator.pushNamed(context, '/profile');
     }
   }
 
@@ -35,11 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: AppColors.colorsBackgroundWhite,
       resizeToAvoidBottomInset: true,
-      // appBar: AppBar(
-      //   backgroundColor: AppColors.colorsBackgroundWhite,
-      //   elevation: 0,
-      //   toolbarHeight: 90,
-      // ),
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -90,12 +86,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       suffixIcon: isPasswordObscure == true
                           ? const Icon(
                               Icons.visibility_off_outlined,
-                              color: AppColors.primaryColor,
+                              color: AppColors.colorsIconGrey,
                               size: 24,
                             )
                           : const Icon(
                               Icons.visibility_outlined,
-                              color: AppColors.primaryColor,
+                              color: AppColors.colorsIconGrey,
                               size: 24,
                             ),
                       onTapSuffixIcon: () {
@@ -109,38 +105,43 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (value == null || value.trim().isEmpty) {
                           return 'This field is required';
                         }
-                        if (value.trim().length < 8) {
-                          return 'Password must be at least 8 characters in length';
+                        if (value.trim().length < 6) {
+                          return 'Password must be at least 6 characters in length';
                         }
                         return null;
                       },
                     ),
+                    const SizedBox(height: 5),
                     const Padding(
-                      padding: EdgeInsets.all(5),
-                    ),
-                    const SizedBox(height: 10),
-                    const TextHeaderLoginComponents(),
-                    const SizedBox(height: 50),
-                    Container(
-                      width: 255,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(10),
+                      padding: EdgeInsets.only(
+                        left: 0,
                       ),
-                      alignment: Alignment.center,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/profile');
-                        },
-                        child: const Text(
+                      child: ForgotMyPasswordComponents(),
+                    ),
+                    const SizedBox(height: 40),
+                    InkWell(
+                      onTap: () {
+                        _trySubmitForm();
+                        // Navigator.pushNamed(context, '/profile');
+                      },
+                      child: Container(
+                        width: 330,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
                           'Sign Up ',
-                          style: TextStyle(color: AppColors.colorsTextWhite),
+                          style: AppFontSize.appFontSizeTextButton.copyWith(
+                            color: AppColors.colorsTextWhite,
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+                    const SizedBox(height: 10),
+                    const TextButtonCreateComponents(),
                   ],
                 ),
               ),

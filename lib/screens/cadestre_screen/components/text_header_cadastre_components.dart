@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fteam_firebase_login_app/utils/colors.dart';
+import 'package:fteam_firebase_login_app/utils/app_colors.dart';
+
+import '../../../utils/app_font_size.dart';
 
 class TextHeaderCadestreComponents extends StatefulWidget {
   const TextHeaderCadestreComponents({super.key});
@@ -32,13 +34,13 @@ class _TextHeaderCadestreComponentsState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Text(
                       ' 👋 Hello,',
                       maxLines: 2,
-                      style: TextStyle(
+                      style: AppFontSize.appFontSizeTextTitleHeader.copyWith(
+                        color: AppColors.colorsTextBold,
                         fontWeight: FontWeight.bold,
-                        fontSize: 22,
                       ),
                       textAlign: TextAlign.start,
                     ),
@@ -47,13 +49,13 @@ class _TextHeaderCadestreComponentsState
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
+                Text(
                   'Are you new here?',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: AppFontSize.appFontSizeTextTitleHeader.copyWith(
+                    color: AppColors.colorsTextBold,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
                   ),
                   textAlign: TextAlign.start,
                 ),
@@ -63,17 +65,17 @@ class _TextHeaderCadestreComponentsState
                     Text.rich(
                       TextSpan(
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'if you have an account /',
-                            style: TextStyle(
+                            style: AppFontSize.appFontSizeTextHeaderSubtitle
+                                .copyWith(
                               color: AppColors.colorsTextGreyHeader,
-                              fontSize: 17,
                             ),
                           ),
                           TextSpan(
                             text: 'Login',
-                            style: const TextStyle(
-                              fontSize: 17,
+                            style: AppFontSize.appFontSizeTextHeaderSubtitle
+                                .copyWith(
                               color: AppColors.colorsTextLogin,
                             ),
                             recognizer: TapGestureRecognizer()
@@ -84,32 +86,6 @@ class _TextHeaderCadestreComponentsState
                         ],
                       ),
                     ),
-
-                    // const Text(
-                    //   'if you have an account /',
-                    //   overflow: TextOverflow.ellipsis,
-                    //   style: TextStyle(
-                    //     color: AppColors.colorsTextGreyHeader,
-                    //     fontSize: 17,
-                    //   ),
-                    //   textAlign: TextAlign.start,
-                    // ),
-                    // TextButton(
-                    //   style: const ButtonStyle(
-                    //     alignment: Alignment.centerLeft,
-                    //   ),
-                    //   onPressed: () {
-                    //     // pagina de criar conta
-                    //   },
-                    //   child: const Text(
-                    //     'Login',
-                    //     style: TextStyle(
-                    //       fontSize: 17,
-                    //       color: AppColors.colorsTextLogin,
-                    //     ),
-                    // textAlign: TextAlign.start,
-                    // ),
-                    // ),
                   ],
                 ),
               ],

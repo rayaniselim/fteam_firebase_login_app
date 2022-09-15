@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        // home: LoginScreen(),
         initialRoute: '/login',
         onGenerateRoute: (settings) {
           switch (settings.name) {

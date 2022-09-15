@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fteam_firebase_login_app/utils/app_colors.dart';
 
 class ImageProfile extends StatelessWidget {
   const ImageProfile({
@@ -7,29 +8,39 @@ class ImageProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          color: Colors.white,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                height: 100,
-                width: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/image/image.jpeg'),
-                    fit: BoxFit.cover,
-                    // scale: 1,
-                  ),
-                ),
-              ),
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 30,
+        ),
+        child: Container(
+          height: 105,
+          width: 105,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(25),
+            image: const DecorationImage(
+              image: AssetImage('assets/image/image.jpeg'),
+              fit: BoxFit.cover,
             ),
           ),
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+                height: 34,
+                width: 34,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: const Icon(
+                  Icons.camera_alt,
+                  color: Colors.white,
+                  size: 18,
+                )),
+          ),
         ),
-      ],
+      ),
     );
   }
 }
